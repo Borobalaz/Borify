@@ -1,0 +1,36 @@
+.collections-widget {
+    border-right: 1px solid #000000;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+    overflow: auto;
+    width: 100%;
+}
+
+.collections-list {
+  display: grid;
+  grid-auto-rows: 1fr; /* ensures all rows have consistent height */
+  align-items: start; /* important */
+}
+
+/* -------------- SCROLLBAR --------------*/
+.collections-widget::-webkit-scrollbar {
+    width: 12px;
+}
+
+.collections-widget::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 1px;
+}
+
+.collections-widget::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(150, 150, 150, 0.7);
+}
+
+.collections-widget::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.collections-widget::-webkit-scrollbar-track:hover {
+    background-color: #e0e0e0;
+}

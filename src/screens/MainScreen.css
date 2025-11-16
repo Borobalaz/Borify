@@ -1,0 +1,6 @@
+.main-screen {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}

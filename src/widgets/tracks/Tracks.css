@@ -1,0 +1,28 @@
+.tracks-widget {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+    overflow: auto;
+    width: 100%;
+}
+
+.tracks-widget::-webkit-scrollbar {
+    width: 12px;
+}
+
+.tracks-widget::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 1px;
+}
+
+.tracks-widget::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(150, 150, 150, 0.7);
+}
+
+.tracks-widget::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.tracks-widget::-webkit-scrollbar-track:hover {
+    background-color: #e0e0e0;
+}
