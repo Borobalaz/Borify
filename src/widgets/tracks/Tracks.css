@@ -4,6 +4,7 @@
     overflow-y: auto;
     overflow: auto;
     width: 100%;
+    background-color: var(--bg-color);
 }
 
 .tracks-widget::-webkit-scrollbar {
@@ -11,7 +12,7 @@
 }
 
 .tracks-widget::-webkit-scrollbar-thumb {
-    background-color: rgba(100, 100, 100, 0.5);
+    background-color: var(--secondary-color);
     border-radius: 1px;
 }
 
@@ -20,9 +21,9 @@
 }
 
 .tracks-widget::-webkit-scrollbar-track {
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
 }
 
 .tracks-widget::-webkit-scrollbar-track:hover {
-    background-color: #e0e0e0;
+    background-color: var(--bg-color);
 }

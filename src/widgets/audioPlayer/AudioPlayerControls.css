@@ -1,0 +1,18 @@
+.audio-player-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  .audio-player-volume-control {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+    .audio-player-slider {
+      margin: 10px;
+      color: #1612ed;
+    }
+  }
+}

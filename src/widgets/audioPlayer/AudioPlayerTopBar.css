@@ -1,0 +1,8 @@
+.audio-player-top-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+  background-color: var(--shade-color);
+  color: var(--text-color);
+}

@@ -2,8 +2,14 @@ html {
 	font-family: 'Segoe UI', sans-serif; /*Font*/
 	font-size: 16px; /*Font mérete (16px=12pt)*/
 	line-height: 1.5; /*Sormagasság, 16px*1.5=24px, tipikus mostanában*/
-	background: #ffffff; /*Sötét téma sötét háttérrel*/
-	color: rgb(0, 0, 0); /*Sötét téma fehér betűkkel*/
+	background: var(--bg-color); /*Sötét téma sötét háttérrel*/
+	color: var(--text-color); /*Sötét téma fehér betűkkel*/
+	/* Default to dark theme */
+	--bg-color: #121212;
+	--text-color: #ffffff;
+	--shade-color: #1e1e1e;
+	--primary-color: #1099de;
+	--secondary-color: #535353;
 }
 
 html,
@@ -51,4 +57,20 @@ button {
 		box-shadow: none; /* Lenyomva nincs árnyék */
 		background: #17b; /* Megváltoztatja a színét, ha aktiváljuk (lenyomjuk) */
 	}
+}
+
+.theme-dark {
+	--bg-color: #121212;
+	--text-color: #dadada;
+	--shade-color: #1e1e1e;
+	--primary-color: #1099de;
+	--secondary-color: #535353;
+}
+
+.theme-light {
+	--bg-color: #ffffff;
+	--shade-color: #f0f0f0;
+	--text-color: #292929;
+	--primary-color: #1099de;
+	--secondary-color: #ababab;
 }

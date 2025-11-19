@@ -2,7 +2,11 @@ import { CollectionCard } from "./CollectionCard";
 import "./Collections.css";
 import { CollectionsHeader } from "./CollectionsHeader";
 
-export function Collections() {
+interface CollectionsProps {
+    onCreateNewCollection?: () => void;
+}
+
+export function Collections({ onCreateNewCollection }: CollectionsProps) {
     const collections = [
         { id: 1, title: "Collection 1" },
         { id: 2, title: "Collection 2" },
@@ -23,7 +27,8 @@ export function Collections() {
 
     return (
         <div className="collections-widget">
-            <CollectionsHeader />
+            <CollectionsHeader 
+                onCreateNewCollection={onCreateNewCollection}/>
             <div className="collections-list">
                 {collections.map((collection) => (
                     <CollectionCard />

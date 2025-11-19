@@ -1,7 +1,19 @@
 .collections-header {
-    background-color: rgb(47, 20, 166);
-    color: white;
-    text-shadow: 3px 3px 5px black;
-    align-items: center;
-    display: flex;
+  background: linear-gradient(to right, var(--primary-color), var(--bg-color));
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  .collections-header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+
+  .collections-new-button {
+    color: var(--text-color);
+    background-color: transparent;
+    box-shadow: None;
+  }
 }
