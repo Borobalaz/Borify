@@ -40,3 +40,4 @@ export async function initDB() {
 
   return db;
 }
+

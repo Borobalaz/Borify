@@ -17,9 +17,18 @@ class AudioController {
     trackChange: [] as Listener[],
     queueUpdate: [] as Listener[],
     ended: [] as Listener[],
+    timeUpdate: [] as Listener[]
   };
 
   constructor() {
+    // Emit time update events
+    this.audio.addEventListener("timeupdate", () => {
+      this.notify("timeUpdate");
+    });
+
+    this.audio.addEventListener("loadedmetadata", () => {
+      this.notify("trackChange");
+    });
 
     // Automatically advance to the next track
     this.audio.addEventListener("ended", () => {
@@ -37,7 +46,6 @@ class AudioController {
       this.audio.src = URL.createObjectURL(track.audio);
       this.currentTrack = track;
       this.currentIndex = -1;
-      this.notify("trackChange");
     }
     if (!this.audio.src) {
       console.warn("AudioController.play(): No audio source loaded.");
@@ -67,6 +75,18 @@ class AudioController {
 
   getVolume() {
     return this.audio?.volume ?? 1;
+  }
+
+  seek(seconds: number) {
+    this.audio.currentTime = seconds;
+  }
+
+  getCurrentTime() {
+    return this.audio.currentTime;
+  }
+
+  getDuration() {
+    return this.audio.duration;
   }
 
   onEnded(callback: () => void) {
@@ -140,7 +160,6 @@ class AudioController {
     const track = this.queue[this.currentIndex];
     this.audio.src = URL.createObjectURL(track.audio);
     this.currentTrack = track;
-    this.notify("trackChange");
   }
 
   getCurrentTrack(): TrackDTO {

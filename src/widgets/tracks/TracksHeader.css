@@ -37,6 +37,9 @@
   & .tracks-header-buttons {
     margin-left: auto;
     margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     & .tracks-header-new-track {
       display: flex;
@@ -46,6 +49,14 @@
       color: var(--text-color);
       box-shadow: none;
     }
+
+    & .tracks-header-play-collection-button {
+      margin-left: auto;
+      width: 30%;
+      height: auto;
+      aspect-ratio: 1/1;
+      color: var(--text-color);
+    } 
   }
 
 }

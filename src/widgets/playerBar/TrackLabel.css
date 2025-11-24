@@ -6,6 +6,7 @@
   color: var(--bg-color);
   font-weight: bold;
   font-size: large;
+  gap: 10px;
 
   & .track-label-collection-cover {
     width: 40px;

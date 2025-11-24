@@ -13,7 +13,7 @@ export function CollectionCard({ collection, onClick }: CollectionCardProps) {
 
   const imageUrl = collection.cover instanceof Blob ?
     URL.createObjectURL(collection.cover) :
-    collection.cover || "collection_placeholder.jpg";
+    collection.cover || "cover_placeholder.png";
 
   async function deleteCollectionFromDatabase() {
     try {

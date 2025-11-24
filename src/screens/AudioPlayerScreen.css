@@ -1,6 +1,7 @@
 .audio-player-screen {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100vh;
@@ -65,28 +66,38 @@
   }
 
   .audio-player-track-info {
-    text-align: center;
-    font-size: xx-large;
-    padding: 5px 0;
-  }
-
-  .audio-player-artist {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    text-align: center;
-    margin: 0;
-  }
-
-  .audio-player-title {
-    font-size: 1.2rem;
+    text-align: start;
     font-weight: bold;
-    text-align: center;
-    margin: 0;
+    margin-bottom: auto;
+    padding: 5px 0;
+    height: 30vh;
+    margin-bottom: auto;
   }
 
-  .audio-player-controls {
-    width: 100%;
-    margin-top: auto;
-    padding-bottom: 10px;
-  }
+}
+
+.audio-player-artist {
+  font-size: 1.5rem;
+  opacity: 1.0;
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 10px 25px rgba(0, 0, 0, 1);
+
+}
+
+.audio-player-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 10px 25px rgba(0, 0, 0, 1);
+
+}
+
+.audio-player-controls {
+  height: 10px;
+  width: 100%;
+  margin-top: 0px;
+  padding-bottom: 10px;
 }

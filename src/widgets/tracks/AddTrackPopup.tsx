@@ -20,12 +20,33 @@ export function AddTrackPopup({ collection }: AddTrackPopupProps) {
 
   async function addTrackToDatabase() {
     try {
+      if (!audio) {
+        console.error("No audio file selected.");
+        return;
+      }
+
+      let duration: number;
+      try {
+        duration = await getDurationWithWebAudio(audio);
+      } catch (err) {
+        console.error("Invalid or unsupported audio file:", err);
+        alert("This file is not a valid audio file.");
+        return;
+      }
+
+      const safeTitle =
+        title?.trim() ? title.trim() :
+          audio?.name?.replace(/\.[^/.]+$/, "") || "Unknown Title";
+
+      const safeArtist =
+        artist?.trim() ? artist.trim() : "Unknown";
+
       let track = {
         track_id: crypto.randomUUID(),
-        title: title,
-        artist: artist,
+        title: safeTitle,
+        artist: safeArtist,
         audio: audio,
-        duration: 1
+        duration: Math.floor(duration),
       };
 
       await addTrack(track);
@@ -37,6 +58,13 @@ export function AddTrackPopup({ collection }: AddTrackPopupProps) {
     } catch (err) {
       console.error("Failed to add track", err);
     }
+  }
+
+  async function getDurationWithWebAudio(blob: Blob): Promise<number> {
+    const arrayBuffer = await blob.arrayBuffer();
+    const audioCtx = new AudioContext();
+    const decoded = await audioCtx.decodeAudioData(arrayBuffer);
+    return decoded.duration;
   }
 
   return (

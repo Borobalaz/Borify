@@ -64,7 +64,7 @@ export function TrackCard({ onPlay, trackID, place }: TrackCardProps) {
         }}>
         <RemoveCircleOutlineIcon />
       </IconButton>
-      <div className="track-card-duration">{trackObj.duration}</div>
+      <div className="track-card-duration">{Math.floor(trackObj.duration / 60)}:{trackObj.duration % 60}</div>
     </div>
   );
 }

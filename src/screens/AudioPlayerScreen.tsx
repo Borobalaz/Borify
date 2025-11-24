@@ -1,6 +1,11 @@
+import { useEffect, useState } from "preact/hooks";
 import { AudioPlayerControls } from "../widgets/audioPlayer/AudioPlayerControls";
 import { AudioPlayerTopBar } from "../widgets/audioPlayer/AudioPlayerTopBar";
 import "./AudioPlayerScreen.css";
+import { audioController } from "../backend/audio-player/AudioController";
+import { CollectionDTO, TrackDTO } from "../backend/database/DTOs";
+import { audio } from "framer-motion/client";
+import { getAllCollections } from "../backend/database/collectionsCRUD";
 
 interface AudioPlayerScreenProps {
   onReturn?: () => void;
@@ -9,13 +14,61 @@ interface AudioPlayerScreenProps {
 
 export function AudioPlayerScreen({ onReturn }: AudioPlayerScreenProps) {
 
+  const [currentTrack, setCurrentTrack] = useState<TrackDTO | null>();
+  const [title, setTitle] = useState<string | null>();
+  const [artist, setArtist] = useState<string | null>();
+  const [cover, setCover] = useState<Blob | null>();
+
+  useEffect(() => {
+    const handleTitle = () => setTitle(audioController.getCurrentTrack()?.title);
+    const handleArtist = () => setArtist(audioController.getCurrentTrack()?.artist);
+    const handleCurrentTrack = async () => {
+      setCurrentTrack(audioController.getCurrentTrack());
+      let collection: CollectionDTO | null = null; // default to null
+
+      if (currentTrack) {
+        let allCollections = await getAllCollections();
+        collection = allCollections.find((col) => col.tracks.includes(currentTrack.track_id)) || null;
+      }
+      setCover(collection?.cover);
+    }
+    const handleEnded = () => {
+      setTitle("");
+      setArtist("");
+      setCurrentTrack(null);
+    }
+
+    audioController.on("trackChange", handleTitle);
+    audioController.on("trackChange", handleArtist);
+    audioController.on("trackChange", handleCurrentTrack);
+    audioController.on("ended", handleEnded);
+
+    // Set initial values on mount
+    setTitle(audioController.getCurrentTrack()?.title);
+    setArtist(audioController.getCurrentTrack()?.artist);
+    setCurrentTrack(audioController.getCurrentTrack());
+
+    return () => {
+      audioController.off("trackChange", handleTitle);
+      audioController.off("trackChange", handleArtist);
+      audioController.off("trackChange", handleCurrentTrack);
+      audioController.off("ended", handleEnded);
+    };
+  }, []);
+
+  function getImageUrl(coverBlob) {
+    return coverBlob instanceof Blob ?
+      URL.createObjectURL(coverBlob) :
+      coverBlob || "cover_placeholder.png";
+  }
+
   return (
     <div className="audio-player-screen" >
       <AudioPlayerTopBar onReturn={onReturn} />
-      <img className="audio-player-image" src="./collection_placeholder.jpg"></img>
+      <img className="audio-player-image" src={getImageUrl(cover)}></img>
       <div className="audio-player-info">
-        <p className="audio-player-title"> Mantova </p>
-        <p className="audio-player-artist"> Hakumba </p>
+        <p className="audio-player-title"> {title} </p>
+        <p className="audio-player-artist"> {artist} </p>
       </div>
       <AudioPlayerControls />
     </div>

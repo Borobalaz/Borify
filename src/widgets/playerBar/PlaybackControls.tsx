@@ -9,20 +9,32 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 export function PlaybackControls() {
 
+  const [duration, setDuration] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  //const [current, setCurrent] = useState(audioController.getCurrentTrack());
-  const [volume, setVolume] = useState(audioController.getVolume());
 
   useEffect(() => {
+    const handleDuration = () => setDuration(audioController.getDuration());
+    const handleCurrentTime = () => setCurrentTime(audioController.getCurrentTime());
+
     audioController.on("play", () => setIsPlaying(true));
     audioController.on("pause", () => setIsPlaying(false));
-    //audioController.on("trackChange", () => setCurrent(audioController.getCurrentTrack()));
+    audioController.on("trackChange", () => handleDuration());
+    audioController.on("timeUpdate", () => handleCurrentTime());
+
+    return () => {
+      audioController.off("play", () => setIsPlaying(true));
+      audioController.off("pause", () => setIsPlaying(false));
+      audioController.off("trackChange", () => handleDuration);
+      audioController.off("timeUpdate", () => handleCurrentTime);
+    };
   }, []);
 
   return (
     <div className="playback-controls">
       <div className="playback-controls-buttons">
-        <IconButton className="playback-control-previous">
+        <IconButton className="playback-control-previous"
+          onClick={() => audioController.previous()}>
           <KeyboardDoubleArrowLeftIcon
             className="playback-control-previous-icon" />
         </IconButton>
@@ -38,23 +50,30 @@ export function PlaybackControls() {
               className="playback-control-pause-icon" />
           </IconButton>
         )
-
         }
-        <IconButton className="playback-control-next">
+        <IconButton className="playback-control-next"
+          onClick={() => audioController.next()}>
           <KeyboardDoubleArrowRightIcon
             className="playback-control-next-icon" />
         </IconButton>
       </div>
       <div className="playback-timeline">
         <p className="playback-timeline-current-time">
-          0:00
+          {Math.floor(currentTime / 60)}:{String(Math.floor(currentTime % 60)).padStart(2, '0')}
         </p>
         <Slider
           className="playback-timeline-slider"
-          defaultValue={0.5}
-           />
+          defaultValue={0}
+          min={0}
+          max={duration}
+          step={0.1}
+          value={currentTime}
+          onChange={(_, value) => {
+            audioController.seek(value as number);
+          }}
+        />
         <p className="playback-timeline-track-time">
-          3:45
+          {Math.floor(duration / 60)}:{String(Math.floor(duration % 60)).padStart(2, '0')}
         </p>
       </div>
     </div>

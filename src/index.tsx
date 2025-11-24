@@ -7,6 +7,7 @@ import "./style.css"
 import { initDB } from "./backend/database/initDatabase";
 import { setupAutoUpdateAllTracksCollection } from "./backend/services/AutoUpdateAllTracksCollection";
 import { PopupProvider } from "./utility/PopupProvider";
+import { loadDefaultData } from "./backend/database/defaultValues";
 
 export function App() {
   let [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
@@ -24,10 +25,19 @@ export function App() {
 
     // DATABASE
     initDatabase();
-
+		setIsDarkTheme(localStorage.getItem("theme") == "dark");
     // SERVICES
     setupAutoUpdateAllTracksCollection();
+    if(localStorage.getItem("first-run") == "true" || !localStorage.getItem("first-run")){
+      loadDefaultData();
+      localStorage.setItem("first-run", "false");
+    }
   }, []);
+
+	useEffect(() => {
+		let theme = isDarkTheme ? "dark": "light";
+		localStorage.setItem("theme", theme);
+	}, [isDarkTheme]);
 
   return (
     <div className={isDarkTheme ? "theme-dark" : "theme-light"}>
@@ -50,6 +60,7 @@ export function App() {
               left: 0,
               width: "100%",
               height: "100%",
+              overflow: "hidden",
             }}
           >
             {(AudioPlayerScreen as any)({ onReturn: () => setIsAudioPlayerOpen(false) })}

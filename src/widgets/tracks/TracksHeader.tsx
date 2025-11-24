@@ -1,9 +1,12 @@
 import { IconButton } from "@mui/material";
-import { CollectionDTO } from "../../backend/database/DTOs";
+import { CollectionDTO, TrackDTO } from "../../backend/database/DTOs";
 import "./TracksHeader.css";
 import UploadIcon from '@mui/icons-material/Upload';
 import { usePopup } from "../../utility/PopupContext";
 import { AddTrackPopup } from "./AddTrackPopup";
+import { audioController } from "../../backend/audio-player/AudioController";
+import { getTrack } from "../../backend/database/tracksCRUD";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 interface TracksHeaderProps {
   collection: CollectionDTO;
@@ -11,11 +14,33 @@ interface TracksHeaderProps {
 
 export function TracksHeader({ collection }: TracksHeaderProps) {
 
-  const {show} = usePopup();
+  const { show } = usePopup();
 
   const imageUrl = collection.cover instanceof Blob ?
     URL.createObjectURL(collection.cover) :
-    collection.cover || "collection_placeholder.jpg";
+    collection.cover || "cover_placeholder.png";
+
+  async function playCollection() {
+    if (!collection || !collection.tracks || collection.tracks.length === 0) {
+      console.warn("Collection is empty or invalid");
+      return;
+    }
+    let tracks : TrackDTO[] = [];
+    for (const trackId of collection.tracks) {
+      try {
+        const track: TrackDTO = await getTrack(trackId);
+        if (track) {
+          tracks.push(track);
+        } else {
+          console.warn(`Track not found: ${trackId}`);
+        }
+      } catch (err) {
+        console.error(`Failed to get track ${trackId}:`, err);
+      }
+    }
+    audioController.setQueue(tracks);
+    audioController.play();
+  }
 
   return (
     <div className="tracks-header">
@@ -28,10 +53,17 @@ export function TracksHeader({ collection }: TracksHeaderProps) {
       <div className="tracks-header-buttons">
         <div className="tracks-header-new-track">
           <p>Upload new track to playlist</p>
-          <IconButton 
+          <IconButton
             className="tracks-new-icon-button"
-            onClick={() => show(<AddTrackPopup collection={collection}/>)}>
+            onClick={() => show(<AddTrackPopup collection={collection} />)}>
             <UploadIcon />
+          </IconButton>
+        </div>
+        <div className="tracks-header-play-collection">
+          <IconButton
+            className="tracks-header-play-collection-button"
+            onClick={() => playCollection()}>
+            <PlayArrowIcon />
           </IconButton>
         </div>
       </div>
