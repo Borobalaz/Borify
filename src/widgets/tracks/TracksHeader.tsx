@@ -16,16 +16,16 @@ export function TracksHeader({ collection }: TracksHeaderProps) {
 
   const { show } = usePopup();
 
-  const imageUrl = collection.cover instanceof Blob ?
+  const imageUrl = collection?.cover ?
     URL.createObjectURL(collection.cover) :
-    collection.cover || "cover_placeholder.png";
+    "cover_placeholder.png";
 
   async function playCollection() {
     if (!collection || !collection.tracks || collection.tracks.length === 0) {
       console.warn("Collection is empty or invalid");
       return;
     }
-    let tracks : TrackDTO[] = [];
+    let tracks: TrackDTO[] = [];
     for (const trackId of collection.tracks) {
       try {
         const track: TrackDTO = await getTrack(trackId);
@@ -42,6 +42,12 @@ export function TracksHeader({ collection }: TracksHeaderProps) {
     audioController.play();
   }
 
+  if (!collection)
+    return (
+      <div>
+        ASD
+      </div>
+    );
   return (
     <div className="tracks-header">
       <img className="tracks-header-image" src={imageUrl} />

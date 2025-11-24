@@ -23,10 +23,12 @@ export function TrackCard({ onPlay, trackID, place }: TrackCardProps) {
 
   useEffect(() => {
     const getTrackFromDatabase = async () => {
-      await initDB();
       setTrackObj(await getTrack(trackID));
       setLoading(false);
     };
+    if(trackID == "t10") {
+      trackID = "t10";
+    }
     getTrackFromDatabase();
   }, [])
 
@@ -64,7 +66,7 @@ export function TrackCard({ onPlay, trackID, place }: TrackCardProps) {
         }}>
         <RemoveCircleOutlineIcon />
       </IconButton>
-      <div className="track-card-duration">{Math.floor(trackObj.duration / 60)}:{trackObj.duration % 60}</div>
+      <div className="track-card-duration">{Math.floor(trackObj.duration / 60)}:{String(Math.floor(trackObj.duration) % 60).padStart(2, '0')}</div>
     </div>
   );
 }

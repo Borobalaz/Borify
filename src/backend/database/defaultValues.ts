@@ -2,47 +2,123 @@ import { CollectionDTO, TrackDTO } from "./DTOs";
 import { addTrack } from "./tracksCRUD";
 import { addCollection } from "./collectionsCRUD";
 
-let response;
-
 export const defaultTracksData = [
   {
     track_id: "t1",
-    title: "Message",
+    title: "Funky Intro",
     artist: "Hakumba",
-    audioPath: "/audio/message-audio.mp3", // public path to file
+    audioPath: "/audio/HAKUMBA - Funky Intro.mp3", // public path to file
   },
   {
     track_id: "t2",
-    title: "Canvas",
+    title: "Banánaszká",
     artist: "Hakumba",
-    audioPath: "/audio/canvas-audio.mp3",
+    audioPath: "/audio/HAKUMBA - Banánaszká.mp3",
   },
   {
     track_id: "t3",
+    title: "Don't lie",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Don't lie.mp3", // public path to file
+  },
+  {
+    track_id: "t4",
+    title: "Scottsman",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Scotsman.mp3",
+  },
+  {
+    track_id: "t5",
+    title: "Throw up",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Throw up.mp3", // public path to file
+  },
+  {
+    track_id: "t6",
+    title: "House of the Rising Sun",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - House of the Rising Sun.mp3",
+  },
+  {
+    track_id: "t7",
+    title: "No Rabbit",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - No rabbit.mp3", // public path to file
+  },
+  {
+    track_id: "t8",
+    title: "Love Buzz",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Love Buzz.mp3",
+  },
+  {
+    track_id: "t9",
+    title: "Nem lesz eső",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Nem lesz eső.mp3",
+  },
+  {
+    track_id: "t10",
+    title: "La Fiesta",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - La-Fi Esta.mp3",
+  },
+  {
+    track_id: "t11",
+    title: "Mariannina",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Mariannina.mp3",
+  },
+  {
+    track_id: "t12",
+    title: "Tabak",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Tabak.mp3",
+  },
+  {
+    track_id: "t14",
+    title: "Narcissus",
+    artist: "Hakumba",
+    audioPath: "/audio/HAKUMBA - Banánaszká.mp3",
+  },
+  {
+    track_id: "t15",
     title: "Ex's and Oh's [Nightcore]",
     artist: "Ellie King x Nightcore Venyx",
-    audioPath: "/audio/exsohs-audio.mp3",
+    audioPath: "/audio/Nightcore Ex's & Oh's - Elle King  (Lyrics).mp3",
+  },
+  {
+    track_id: "t16",
+    title: "This Little Girl",
+    artist: "Nightcore",
+    audioPath: "/audio/Nightcore - This Little Girl.mp3",
+  },
+  {
+    track_id: "t17",
+    title: "Ott, ahol zúg az a négy folyó [Nightcore]",
+    artist: "Kárpátia",
+    audioPath: "/audio/Kárpátia - Ott, ahol zúg az a négy folyó (Hard Nightcore).mp3",
   },
 ];
 
 export const defaultCollectionsData = [
   {
     collection_id: "c1",
-    title: "Message",
+    title: "Véletlen volt nem direkt",
     description: "Hakumba",
-    coverPath: "/covers/message-cover.jpg",
-    tracks: ["t1", "t2"],
+    coverPath: "/covers/veletlen-volt.jpeg",
+    tracks: ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12", "t14"],
   },
   {
     collection_id: "c2",
     title: "Nightcore",
     description: "",
     coverPath: "/covers/nightcore-cover.jpg",
-    tracks: ["t3"],
+    tracks: ["t15", "t16", "t17"],
   },
 ];
 
-export async function loadDefaultData() {
+export async function loadDefaultData(): Promise<void> {
   const tracks: TrackDTO[] = [];
   for (const t of defaultTracksData) {
     const audioResp = await fetch(t.audioPath);
@@ -69,7 +145,7 @@ export async function loadDefaultData() {
       collection_id: c.collection_id,
       title: c.title,
       description: c.description,
-      cover: coverBlob,      // Blob or null
+      cover: coverBlob,    
       tracks: c.tracks,
     });
   }

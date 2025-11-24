@@ -4,7 +4,6 @@ import { AudioPlayerTopBar } from "../widgets/audioPlayer/AudioPlayerTopBar";
 import "./AudioPlayerScreen.css";
 import { audioController } from "../backend/audio-player/AudioController";
 import { CollectionDTO, TrackDTO } from "../backend/database/DTOs";
-import { audio } from "framer-motion/client";
 import { getAllCollections } from "../backend/database/collectionsCRUD";
 
 interface AudioPlayerScreenProps {

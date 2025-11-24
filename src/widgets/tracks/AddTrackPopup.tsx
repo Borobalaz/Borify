@@ -94,6 +94,7 @@ export function AddTrackPopup({ collection }: AddTrackPopupProps) {
           {audio?.name || "Drop or Click"}
           <input
             type="file"
+            accept=".mp3, .wav, .aac, .ogg"
             hidden
             onChange={(e) => {
               const file = e.currentTarget.files?.[0];

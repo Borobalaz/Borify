@@ -4,7 +4,7 @@ import "./Collections.css";
 import { CollectionsHeader } from "./CollectionsHeader";
 import { CollectionDTO } from "../../backend/database/DTOs";
 import { getAllCollections } from "../../backend/database/collectionsCRUD";
-import { onCollectionsUpdated } from "../../backend/database/databaseEvents";
+import { offCollectionsUpdated, onCollectionsUpdated } from "../../backend/database/databaseEvents";
 import { initDB } from "../../backend/database/initDatabase";
 import { getAllTracks } from "../../backend/database/tracksCRUD";
 
@@ -27,6 +27,10 @@ export function Collections({ onCollapse, onSelectedCollectionChange}: Collectio
     };
     onCollectionsUpdated(loadCollections);
     loadCollections();
+  
+    return () => {
+      offCollectionsUpdated(loadCollections);
+    };
   }, []);
 
   return (

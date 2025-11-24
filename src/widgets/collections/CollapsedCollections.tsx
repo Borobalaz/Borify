@@ -3,7 +3,7 @@ import "./CollapsedCollections.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { CollectionDTO } from "../../backend/database/DTOs";
 import { getAllCollections } from "../../backend/database/collectionsCRUD";
-import { onCollectionsUpdated } from "../../backend/database/databaseEvents";
+import { offCollectionsUpdated, onCollectionsUpdated } from "../../backend/database/databaseEvents";
 
 interface CollapsedCollectionsProps {
   onExpand: () => void;
@@ -20,6 +20,10 @@ export function CollapsedCollections({ onExpand }: CollapsedCollectionsProps) {
     };
     loadCollections();
     onCollectionsUpdated(loadCollections);
+
+    return () => {
+      offCollectionsUpdated(loadCollections);
+    };
   }, []);
 
   return (
@@ -36,7 +40,7 @@ export function CollapsedCollections({ onExpand }: CollapsedCollectionsProps) {
             className="collapsed-collection-image"
             src={c.cover instanceof Blob ?
               URL.createObjectURL(c.cover) :
-              c.cover || "collection_placeholder.jpg"}
+              c.cover || "cover_placeholder.png"}
           />
         ))}
       </div>

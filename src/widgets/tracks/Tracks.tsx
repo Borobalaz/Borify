@@ -37,12 +37,10 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
 
     setLoading(true);
     loadCollection();
-    onTracksUpdated(loadCollection);
     onCollectionsUpdated(loadCollection);
 
     return () => {
-      try { offTracksUpdated(loadCollection); } catch (e) { /* ignore */ }
-      try { offCollectionsUpdated(loadCollection); } catch (e) { /* ignore */ }
+      offCollectionsUpdated(loadCollection);
     };
   }, [collection_id]);
 
@@ -58,6 +56,7 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
         {(collection ?
           collection.tracks.map((track, index) => (
             <TrackCard
+              key={track}
               onPlay={onPlayTrack}
               trackID={track}
               place={index + 1} />

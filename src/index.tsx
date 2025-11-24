@@ -8,40 +8,59 @@ import { initDB } from "./backend/database/initDatabase";
 import { setupAutoUpdateAllTracksCollection } from "./backend/services/AutoUpdateAllTracksCollection";
 import { PopupProvider } from "./utility/PopupProvider";
 import { loadDefaultData } from "./backend/database/defaultValues";
+import { offTracksUpdated, onTracksUpdated } from "./backend/database/databaseEvents";
+import { LoadingScreen } from "./screens/LoadingScreen";
 
 export function App() {
   let [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false);
   let [isDarkTheme, setIsDarkTheme] = useState(true);
+  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
-    const initDatabase = async () => {
-      await initDB().then(() => {
+    const initializeApp = async () => {
+      try {
+        await initDB();
         console.log("IndexedDB initialized");
-      }).catch(err => {
-        console.error("Failed to initialize IndexedDB", err);
-      });
+
+        setIsDarkTheme(localStorage.getItem("theme") == "dark");
+
+        onTracksUpdated(setupAutoUpdateAllTracksCollection);
+
+        // Load default data if first run
+        if (localStorage.getItem("first-run") == "true" || !localStorage.getItem("first-run")) {
+          await loadDefaultData();
+          localStorage.setItem("first-run", "false");
+        }
+      } catch (err) {
+        console.error("Failed to initialize app", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    // DATABASE
-    initDatabase();
-		setIsDarkTheme(localStorage.getItem("theme") == "dark");
-    // SERVICES
-    setupAutoUpdateAllTracksCollection();
-    if(localStorage.getItem("first-run") == "true" || !localStorage.getItem("first-run")){
-      loadDefaultData();
-      localStorage.setItem("first-run", "false");
-    }
+    initializeApp();
+
+    return () => {
+      offTracksUpdated(setupAutoUpdateAllTracksCollection);
+    };
   }, []);
 
-	useEffect(() => {
-		let theme = isDarkTheme ? "dark": "light";
-		localStorage.setItem("theme", theme);
-	}, [isDarkTheme]);
+  useEffect(() => {
+    let theme = isDarkTheme ? "dark" : "light";
+    localStorage.setItem("theme", theme);
+  }, [isDarkTheme]);
+
+  if (loading) {
+    return (
+      <div className={isDarkTheme ? "theme-dark" : "theme-light"}>
+        <LoadingScreen />
+      </div>
+    );
+  }
 
   return (
     <div className={isDarkTheme ? "theme-dark" : "theme-light"}>
-      <div id="popup-root"/>
+      <div id="popup-root" />
       <MainScreen
         onOpenPlayer={() => setIsAudioPlayerOpen(true)}
         onThemeChange={() => setIsDarkTheme(!isDarkTheme)} />

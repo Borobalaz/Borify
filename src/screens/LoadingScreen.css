@@ -1,0 +1,68 @@
+.loading-screen {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  color: var(--text-color, #fff);
+
+  /* ─────────────────────────────────────── */
+  /* Your gradient-tile background pattern   */
+  /* ─────────────────────────────────────── */
+  --w: 8rem;           /* tile size */
+  --r: calc(var(--w) / 2);
+  --n: 11;
+  --t: calc(var(--r) / var(--n));
+
+  --g:
+    var(--primary-color) 0 calc(var(--t) * 1 - 1px),
+    var(--secondary-color) calc(var(--t) * 1) calc(var(--t) * 2 - 1px),
+    var(--primary-color) calc(var(--t) * 2) calc(var(--t) * 3 - 1px),
+    var(--secondary-color) calc(var(--t) * 3) calc(var(--t) * 4 - 1px),
+    var(--primary-color) calc(var(--t) * 4) calc(var(--t) * 5 - 1px),
+    var(--secondary-color) calc(var(--t) * 5) calc(var(--t) * 6 - 1px),
+    var(--primary-color) calc(var(--t) * 6) calc(var(--t) * 7 - 1px),
+    var(--secondary-color) calc(var(--t) * 7) calc(var(--t) * 8 - 1px),
+    var(--primary-color) calc(var(--t) * 8) calc(var(--t) * 9 - 1px),
+    var(--secondary-color) calc(var(--t) * 9) calc(var(--t) * 10 - 1px),
+    var(--primary-color) calc(var(--t) * 10) calc(var(--t) * 11 - 1px),
+    #0000 calc(var(--t) * 11);
+
+  background:
+    radial-gradient(circle at 0% 0%, var(--g)),
+    radial-gradient(circle at 100% 100%, var(--g)),
+    radial-gradient(circle at 50% 50%, var(--g)),
+    radial-gradient(circle at 100% 0%, var(--g)),
+    radial-gradient(circle at 0% 100%, var(--g));
+
+  background-size: var(--w) var(--w);
+  /* ─────────────────────────────────────── */
+
+  font-family: system-ui, sans-serif;
+}
+
+/* Minimal pulse loader */
+.loader {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+  animation: pulse 0.9s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(0.9); opacity: 0.4; }
+  50%  { transform: scale(1.15); opacity: 0.9; }
+  100% { transform: scale(0.9); opacity: 0.4; }
+}
+
+.loading-screen p {
+  margin-top: 12px;
+  font-size: 1rem;
+  opacity: 0.75;
+}
