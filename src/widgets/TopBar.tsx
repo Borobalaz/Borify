@@ -8,8 +8,11 @@ interface TopBarProps {
 export function TopBar({ onThemeChange }: TopBarProps) {
   return (
     <div className="top-bar">
-      <p>Top Bar</p>
-      <DarkModeIcon className="top-bar-theme-icon" onClick={onThemeChange} />
+      <p className="top-bar-title">Borify</p>
+      <div className="top-bar-buttons">
+        <DarkModeIcon className="top-bar-theme-icon" onClick={onThemeChange} />
+
+      </div>
     </div>
   );
 }

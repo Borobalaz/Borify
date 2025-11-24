@@ -1,5 +1,29 @@
-.volume-control{
-    display: flex;
-    justify-content: right;
-    align-items: center;
+.player-bar-volume-control {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 10px;
+  width: 150px;
+
+  & .player-bar-volume-slider {
+    color: var(--bg-color);
+    justify-content: flex-end;
+
+  }
+
+  & .MuiSlider {
+    size:"small";
+  }
+
+  & .MuiSlider-thumb {
+    opacity: 0;
+    size: "small";
+
+    &:hover,
+    &:focus-visible,
+    &.Mui-active {
+      opacity: 1;
+    }
+  }
 }

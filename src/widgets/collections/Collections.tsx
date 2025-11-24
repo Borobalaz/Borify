@@ -1,39 +1,48 @@
+import { useEffect, useState } from "preact/hooks";
 import { CollectionCard } from "./CollectionCard";
 import "./Collections.css";
 import { CollectionsHeader } from "./CollectionsHeader";
+import { CollectionDTO } from "../../backend/database/DTOs";
+import { getAllCollections } from "../../backend/database/collectionsCRUD";
+import { onCollectionsUpdated } from "../../backend/database/databaseEvents";
+import { initDB } from "../../backend/database/initDatabase";
+import { getAllTracks } from "../../backend/database/tracksCRUD";
 
 interface CollectionsProps {
-    onCreateNewCollection?: () => void;
+  onCollapse: () => void;
+  onSelectedCollectionChange: (selectedCollection) => void;
 }
 
-export function Collections({ onCreateNewCollection }: CollectionsProps) {
-    const collections = [
-        { id: 1, title: "Collection 1" },
-        { id: 2, title: "Collection 2" },
-        { id: 3, title: "Collection 3" },
-        { id: 4, title: "Collection 4" },
-        { id: 5, title: "Collection 5" },
-        { id: 6, title: "Collection 6" },
-        { id: 7, title: "Collection 7" },
-        { id: 2, title: "Collection 2" },
-        { id: 3, title: "Collection 3" },
-        { id: 4, title: "Collection 4" },
-        { id: 5, title: "Collection 5" },
-        { id: 6, title: "Collection 6" },
-        { id: 7, title: "Collection 7" },
+export function Collections({ onCollapse, onSelectedCollectionChange}: CollectionsProps) {
 
-        // ...
-    ];
+  const [collections, setCollections] = useState<CollectionDTO[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    return (
-        <div className="collections-widget">
-            <CollectionsHeader 
-                onCreateNewCollection={onCreateNewCollection}/>
-            <div className="collections-list">
-                {collections.map((collection) => (
-                    <CollectionCard />
-                ))}
-            </div>
+  useEffect(() => {
+    const loadCollections = async () => {
+      await initDB();
+      const allCollections = await getAllCollections();
+      setCollections(allCollections);
+      setLoading(false)
+    };
+    onCollectionsUpdated(loadCollections);
+    loadCollections();
+  }, []);
+
+  return (
+    <div className="collections-widget">
+      <CollectionsHeader
+        onCollapse={onCollapse} />
+      {(loading ?
+        <p className="collections-list-loading-text">Loading...</p> :
+        <div className="collections-list">
+          {collections.map((c) => (
+            <CollectionCard 
+              collection={c} 
+              onClick={onSelectedCollectionChange}/>
+          ))}
         </div>
-    );
-}
+      )}
+    </div>
+  );
+} 

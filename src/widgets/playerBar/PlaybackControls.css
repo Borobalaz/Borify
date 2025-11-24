@@ -1,5 +1,40 @@
 .playback-controls {
+  align-items: center;
+
+  & .playback-controls-buttons {
     display: flex;
     justify-content: center;
+  }
+
+  & .playback-control-previous,
+  & .playback-control-pause,
+  & .playback-control-next {
+    box-shadow: none;
+    margin-left: 5px;
+    margin-right: 5px;
     align-items: center;
+  }
+
+  & .playback-control-previous-icon,
+  & .playback-control-pause-icon,
+  & .playback-control-next-icon {
+    font-size: 2rem;
+    color: var(--text-color);
+
+  }
+
+  & .playback-timeline {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+    gap: 10px;
+  }
+
+  & .playback-timeline-slider {
+    justify-content: center;
+    color: var(--bg-color);
+    width: 80%;
+    align-self: center;
+  }
 }

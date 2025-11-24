@@ -1,19 +1,42 @@
 .collections-header {
   background: linear-gradient(to right, var(--primary-color), var(--bg-color));
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
+  box-sizing: border-box;
+}
 
-  .collections-header-title {
-    font-size: 24px;
-    font-weight: bold;
+.collections-header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.collections-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.collections-new-button {
+  color: var(--text-color);
+  background-color: transparent;
+  box-shadow: none;
+
+  & .collections-new-icon {
     color: var(--text-color);
   }
+}
 
-  .collections-new-button {
-    color: var(--text-color);
-    background-color: transparent;
-    box-shadow: None;
-  }
+
+.collections-back-icon {
+  color: var(--text-color);
+  background-color: transparent;
+  box-shadow: none;
+  margin-right: 0px;
+  cursor: pointer;
+
 }

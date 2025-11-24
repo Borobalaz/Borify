@@ -1,0 +1,15 @@
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.popup-body {
+  background: var(--bg-color);
+  padding: 0px;
+  border-radius: 12px;
+}

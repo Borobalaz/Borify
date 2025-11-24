@@ -1,29 +1,50 @@
 .tracks-widget {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    overflow-y: auto;
-    overflow: auto;
-    width: 100%;
-    background-color: var(--bg-color);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow-y: auto;
+  overflow: auto;
+  width: 100%;
+  background-color: var(--bg-color);
+  margin-left: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  min-width: 0;
+
+  & .tracks-list {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
+
+.tracks-widget-loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.2em;
+  color: var(--text-color);
+}
+
+
 .tracks-widget::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
 .tracks-widget::-webkit-scrollbar-thumb {
-    background-color: var(--secondary-color);
-    border-radius: 1px;
+  background-color: var(--secondary-color);
+  border-radius: 1px;
 }
 
 .tracks-widget::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(150, 150, 150, 0.7);
+  background-color: rgba(150, 150, 150, 0.7);
 }
 
 .tracks-widget::-webkit-scrollbar-track {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
 }
 
 .tracks-widget::-webkit-scrollbar-track:hover {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
 }

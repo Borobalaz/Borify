@@ -7,8 +7,43 @@
   padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: var(--bg-color);
+
+  /* Color variables for the gradient pattern */
+  --w: 8rem;
+  /* size of each radial pattern tile */
+  --r: calc(var(--w) / 2);
+  /* radius */
+  --n: 11;
+  /* number of steps */
+  --t: calc(var(--r) / var(--n));
+
+  /* Precomputed step gradient using primary and secondary colors */
+  --g:
+    var(--primary-color) 0 calc(var(--t) * 1 - 1px),
+    var(--secondary-color) calc(var(--t) * 1) calc(var(--t) * 2 - 1px),
+    var(--primary-color) calc(var(--t) * 2) calc(var(--t) * 3 - 1px),
+    var(--secondary-color) calc(var(--t) * 3) calc(var(--t) * 4 - 1px),
+    var(--primary-color) calc(var(--t) * 4) calc(var(--t) * 5 - 1px),
+    var(--secondary-color) calc(var(--t) * 5) calc(var(--t) * 6 - 1px),
+    var(--primary-color) calc(var(--t) * 6) calc(var(--t) * 7 - 1px),
+    var(--secondary-color) calc(var(--t) * 7) calc(var(--t) * 8 - 1px),
+    var(--primary-color) calc(var(--t) * 8) calc(var(--t) * 9 - 1px),
+    var(--secondary-color) calc(var(--t) * 9) calc(var(--t) * 10 - 1px),
+    var(--primary-color) calc(var(--t) * 10) calc(var(--t) * 11 - 1px),
+    #0000 calc(var(--t) * 11);
+
+  /* Radial gradient tiled background using the step gradient */
+  background:
+    radial-gradient(circle at 0% 0%, var(--g)),
+    radial-gradient(circle at 100% 100%, var(--g)),
+    radial-gradient(circle at 50% 50%, var(--g)),
+    radial-gradient(circle at 100% 0%, var(--g)),
+    radial-gradient(circle at 0% 100%, var(--g));
+
+  background-size: var(--w) var(--w);
+
   color: var(--text-color);
+  transition: transform 0.2s cubic-bezier(.32, 0, .15, 1);
 
   .audio-player-top-bar {
     width: 100%;
@@ -26,13 +61,13 @@
     margin: 10px 0;
     border-radius: 12px;
     flex-shrink: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   }
 
   .audio-player-track-info {
     text-align: center;
+    font-size: xx-large;
     padding: 5px 0;
-
-
   }
 
   .audio-player-artist {

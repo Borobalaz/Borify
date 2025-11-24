@@ -1,40 +1,93 @@
 .collection-creator-popup {
-  width: 400px;
-  padding: 20px;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  background: var(--shade-color);
+  padding: 26px;
+  border-radius: 14px;
+
+  width: 360px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.18);
+
+  color: var(--text-color);
+  font-family: system-ui, sans-serif;
+}
+
+/* Title */
+.collection-creator-popup h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.collection-creator-popup input[type="text"],
+.collection-creator-popup textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--bg-color, #444);
+  background: var(--bg-color);
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  z-index: 1000;
+  font-size: 1rem;
+  color: var(--text-color);
 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  .collection-name-input {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    margin: 10px 0;
-  }
+  transition: border 0.2s ease, background 0.2s ease;
+}
 
-  .collection-description-input {
-    resize: none;
-    background-color: #fff;
-  }
+.collection-creator-popup input[type="text"]:focus,
+.collection-creator-popup textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--shade-color);
+}
 
-  .collection-cover-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .collection-cover-input{
-      width: 50%;
-    }
-  }
+.collection-creator-popup textarea {
+  resize: none;
+  height: 80px;
+}
 
-  .create-collection-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 10%;
-  }
+.collection-cover-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.collection-cover-label p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.collection-cover-input {
+  padding: 8px;
+  background: var(--bg-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #444);
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.collection-creator-popup .create-collection-button {
+  align-self: center;
+
+  width: 48px;
+  height: 48px;
+
+  background: var(--primary-color);
+  color: white;
+
+  border-radius: 10px !important;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.collection-creator-popup .create-collection-button:hover {
+  background: var(--primary-color-hover, #777);
+  transform: translateY(-2px);
+}
+
+.collection-creator-popup .create-collection-button:active {
+  transform: translateY(0);
 }

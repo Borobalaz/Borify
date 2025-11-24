@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import "./AudioPlayerTopBar.css";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 interface AudioPlayerTopBarProps {
   onReturn: () => void;
@@ -13,7 +13,7 @@ export function AudioPlayerTopBar({ onReturn }: AudioPlayerTopBarProps) {
         className="audio-player-top-bar-return-button" 
         color="inherit"
         onClick={onReturn}>
-        <ArrowBackIcon />
+        <ArrowDownwardIcon />
       </IconButton>
       <div className="audio-player-top-bar-title"> Now Playing </div>
     </div>

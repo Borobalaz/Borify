@@ -1,35 +1,52 @@
 .collections-widget {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    overflow-y: auto;
-    overflow: auto;
-    width: 100%;
-}
-
-.collections-list {
   display: grid;
-  grid-auto-rows: 1fr; /* ensures all rows have consistent height */
-  align-items: start; /* important */
+  grid-template-rows: auto 1fr;
+  width: 100%;
+  min-width: 300px;
+  margin-right: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  & .collections-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    grid-auto-rows: min-content;
+    min-width: 0;
+    scrollbar-gutter: stable;
+  }
+
+  & .collections-list-loading-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1.2em;
+    color: var(--text-color);
+  }
 }
 
 /* -------------- SCROLLBAR --------------*/
-.collections-widget::-webkit-scrollbar {
-    width: 12px;
+.collections-list::-webkit-scrollbar {
+  width: 8px;
 }
 
-.collections-widget::-webkit-scrollbar-thumb {
-    background-color: var(--secondary-color);
-    border-radius: 5px;
+.collections-list::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
 }
 
-.collections-widget::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(150, 150, 150, 0.7);
+.collections-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(150, 150, 150, 0.7);
 }
 
-.collections-widget::-webkit-scrollbar-track {
-    background-color: var(--bg-color);
+.collections-list::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
 }
 
-.collections-widget::-webkit-scrollbar-track:hover {
-    background-color: var(--bg-color);
+.collections-list::-webkit-scrollbar-track:hover {
+  background-color: var(--bg-color);
 }

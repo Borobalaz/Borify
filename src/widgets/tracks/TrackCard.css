@@ -18,6 +18,10 @@
   font-weight: bold;
 }
 
+.track-card .track-card-play-icon {
+  cursor: pointer;
+}
+
 .track-card .track-card-info {
   flex: 1;
   display: flex;

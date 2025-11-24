@@ -1,5 +1,20 @@
 .track-label {
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 10px;
+  color: var(--bg-color);
+  font-weight: bold;
+  font-size: large;
+
+  & .track-label-collection-cover {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  & .open-player-button {
+    margin: 5px;
+  }
 }

@@ -5,31 +5,47 @@
   align-items: center;
   display: flex;
 
-  .tracks-header-image {
+  & .tracks-header-image {
     width: 150px;
     height: 150px;
     object-fit: cover;
     margin: 20px;
   }
 
-  .tracks-header-info {
+  & .tracks-header-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    .tracks-header-label {
+    & .tracks-header-label {
       font-size: 20px;
       margin: 0;
     }
 
-    .tracks-header-title {
+    & .tracks-header-title {
       font-size: 32px;
       font-weight: bold;
       margin: 0;
     }
 
-    .tracks-header-description {
+    & .tracks-header-description {
       font-size: 16px;
       margin: 0;
     }
   }
+
+  & .tracks-header-buttons {
+    margin-left: auto;
+    margin-right: 50px;
+
+    & .tracks-header-new-track {
+      display: flex;
+    }
+
+    & .tracks-new-icon-button {
+      color: var(--text-color);
+      box-shadow: none;
+    }
+  }
+
+}

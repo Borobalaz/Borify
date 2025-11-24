@@ -5,4 +5,12 @@
   justify-content: space-between;
   background-color: var(--shade-color);
   color: var(--text-color);
+
+  & .audio-player-back-icon {
+    color: var(--text-color);
+    background-color: transparent;
+    box-shadow: none;
+    margin-right: 10px;
+    cursor: pointer;
+  }
 }

@@ -1,38 +1,44 @@
 .main-screen {
-    display: grid;
-    grid-template-columns: 3fr 8fr;
-    grid-template-rows: auto 1fr auto;
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    overflow: hidden;
-    background-color: var(--bg-color);
+  display: grid;
+  grid-template-columns: 300px minmax(0, 8fr);
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  transition: grid-template-columns 250ms ease-in-out;
 }
 
-.main-screen .top-bar {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-    margin: 10px;
-    border-radius: 5px;
+.main-screen.collapsed-collections {
+  grid-template-columns: 60px minmax(0, 10fr);
 }
 
-.main-screen .collections-widget {
-    grid-column: 1;
-    grid-row: 2;
-    margin-right: 20px;
-    border-radius: 5px;
-    overflow-y: auto;
+@media (max-width: 700px) {
+  .main-screen {
+    grid-template-columns: minmax(0, 0.0fr) minmax(0, 1fr);
+  }
+  .collections-widget {
+    display: none;
+  }
 }
 
-.main-screen .tracks-widget {
-    grid-column: 2;
-    grid-row: 2;
-    margin-left: 5px;
-    border-radius: 5px;
-    overflow-y: auto;
+.main-screen>.top-bar {
+  grid-column: 1 / span 2;
+  grid-row: 1;
 }
 
-.main-screen .music-player-bar {
-    grid-column: 1 / span 2;
-    grid-row: 3;
+.main-screen>.collections-widget {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.main-screen>.tracks-widget {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.main-screen>.music-player-bar {
+  grid-column: 1 / span 2;
+  grid-row: 3;
 }
