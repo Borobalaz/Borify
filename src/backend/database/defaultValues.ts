@@ -7,97 +7,97 @@ export const defaultTracksData = [
     track_id: "t1",
     title: "Funky Intro",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Funky Intro.mp3", // public path to file
+    audioPath: "/audio/HAKUMBA-FunkyIntro.mp3", // public path to file
   },
   {
     track_id: "t2",
     title: "Banánaszká",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Banánaszká.mp3",
+    audioPath: "/audio/HAKUMBA-Bananaszka.mp3",
   },
   {
     track_id: "t3",
     title: "Don't lie",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Don't lie.mp3", // public path to file
+    audioPath: "/audio/HAKUMBA-Don'tlie.mp3", // public path to file
   },
   {
     track_id: "t4",
     title: "Scottsman",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Scotsman.mp3",
+    audioPath: "/audio/HAKUMBA-Scotsman.mp3",
   },
   {
     track_id: "t5",
     title: "Throw up",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Throw up.mp3", // public path to file
+    audioPath: "/audio/HAKUMBA-Throwup.mp3", // public path to file
   },
   {
     track_id: "t6",
     title: "House of the Rising Sun",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - House of the Rising Sun.mp3",
+    audioPath: "/audio/HAKUMBA-HouseoftheRisingSun.mp3",
   },
   {
     track_id: "t7",
     title: "No Rabbit",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - No rabbit.mp3", // public path to file
+    audioPath: "/audio/HAKUMBA-Norabbit.mp3", // public path to file
   },
   {
     track_id: "t8",
     title: "Love Buzz",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Love Buzz.mp3",
+    audioPath: "/audio/HAKUMBA-LoveBuzz.mp3",
   },
   {
     track_id: "t9",
     title: "Nem lesz eső",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Nem lesz eső.mp3",
+    audioPath: "/audio/HAKUMBA-Nemleszeso.mp3",
   },
   {
     track_id: "t10",
     title: "La Fiesta",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - La-Fi Esta.mp3",
+    audioPath: "/audio/HAKUMBA-La-FiEsta.mp3",
   },
   {
     track_id: "t11",
     title: "Mariannina",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Mariannina.mp3",
+    audioPath: "/audio/HAKUMBA-Mariannina.mp3",
   },
   {
     track_id: "t12",
     title: "Tabak",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Tabak.mp3",
+    audioPath: "/audio/HAKUMBA-Tabak.mp3",
   },
   {
     track_id: "t14",
     title: "Narcissus",
     artist: "Hakumba",
-    audioPath: "/audio/HAKUMBA - Banánaszká.mp3",
+    audioPath: "/audio/HAKUMBA-Narcissus.mp3",
   },
   {
     track_id: "t15",
     title: "Ex's and Oh's [Nightcore]",
     artist: "Ellie King x Nightcore Venyx",
-    audioPath: "/audio/Nightcore Ex's & Oh's - Elle King  (Lyrics).mp3",
+    audioPath: "/audio/NightcoreEx's&Oh's-ElleKing(Lyrics).mp3",
   },
   {
     track_id: "t16",
     title: "This Little Girl",
     artist: "Nightcore",
-    audioPath: "/audio/Nightcore - This Little Girl.mp3",
+    audioPath: "/audio/Nightcore-ThisLittleGirl.mp3",
   },
   {
     track_id: "t17",
     title: "Ott, ahol zúg az a négy folyó [Nightcore]",
     artist: "Kárpátia",
-    audioPath: "/audio/Kárpátia - Ott, ahol zúg az a négy folyó (Hard Nightcore).mp3",
+    audioPath: "/audio/Karpatia-Ott,aholzugazanegyfolyo(HardNightcore).mp3",
   },
 ];
 
