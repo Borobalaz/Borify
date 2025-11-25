@@ -11,7 +11,7 @@ export function PlaybackControls() {
 
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const handleDuration = () => setDuration(audioController.getDuration());
@@ -21,6 +21,9 @@ export function PlaybackControls() {
     audioController.on("pause", () => setIsPlaying(false));
     audioController.on("trackChange", () => handleDuration());
     audioController.on("timeUpdate", () => handleCurrentTime());
+    
+    handleDuration();
+    handleCurrentTime();
 
     return () => {
       audioController.off("play", () => setIsPlaying(true));

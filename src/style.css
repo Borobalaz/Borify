@@ -24,6 +24,8 @@ div {
 body {
 	min-height: 100vh; /* ablak méretű */
 	max-height: 100vh; /* ablak méretű */
+  min-width: 500px;
+  overflow-y: hidden;
 }
 
 input,

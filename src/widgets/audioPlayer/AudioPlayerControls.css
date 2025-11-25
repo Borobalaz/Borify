@@ -5,14 +5,13 @@
   align-items: center;
   padding: 20px;
 
-  .audio-player-volume-control {
+  & .audio-player-controls-buttons {
+    width: 80%;
+  }
+  & .audio-player-volume-control {
     display: flex;
-    width: 60%;
     align-items: center;
-    justify-content: space-between;
-    .audio-player-slider {
-      margin: 10px;
-      color: var(--text-color);
-    }
+    gap: 20px;
+    flex-direction: row;
   }
 }

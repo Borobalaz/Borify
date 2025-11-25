@@ -2,6 +2,8 @@ import { Slider } from "@mui/material";
 import "./AudioPlayerControls.css";
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { PlaybackControls } from "../playerBar/PlaybackControls";
+import { VolumeControl } from "../playerBar/VolumeControl";
 
 export function AudioPlayerControls() {
   return (
@@ -10,13 +12,11 @@ export function AudioPlayerControls() {
 
       </div>
       <div className="audio-player-controls-buttons">
-
+        <PlaybackControls />
       </div>
       <div className="audio-player-volume-control">
         <VolumeDownIcon />
-        <Slider 
-          className="audio-player-slider" 
-          defaultValue={30} />
+        <VolumeControl />
         <VolumeUpIcon />
       </div>
     </div>

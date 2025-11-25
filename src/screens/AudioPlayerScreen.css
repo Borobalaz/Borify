@@ -1,7 +1,7 @@
 .audio-player-screen {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 100vh;
@@ -59,9 +59,7 @@
     justify-content: center;
     align-items: center;
     background-color: #444;
-    margin: 10px 0;
     border-radius: 12px;
-    flex-shrink: 0;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   }
 
@@ -69,7 +67,6 @@
     text-align: start;
     font-weight: bold;
     margin-bottom: auto;
-    padding: 5px 0;
     height: 30vh;
     margin-bottom: auto;
   }
@@ -99,5 +96,5 @@
   height: 10px;
   width: 100%;
   margin-top: 0px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 }

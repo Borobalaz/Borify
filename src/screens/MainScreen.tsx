@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { initDB } from "../backend/database/initDatabase";
 import { getAllCollections } from "../backend/database/collectionsCRUD";
 import { CollectionDTO } from "../backend/database/DTOs";
+import { TrackQueue } from "../widgets/queue/TrackQueue";
 
 interface MainScreenProps {
   onPlayTrack?: () => void;
@@ -54,6 +55,7 @@ export function MainScreen({ onPlayTrack, onThemeChange, onOpenPlayer }: MainScr
         onPlayTrack={onPlayTrack} 
         collection_id={selectedCollection?.collection_id} 
         />
+      <TrackQueue />
       <MusicPlayerBar onOpenPlayer={() => (onOpenPlayer && onOpenPlayer())}/>
 
     </div>

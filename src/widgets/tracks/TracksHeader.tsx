@@ -7,6 +7,7 @@ import { AddTrackPopup } from "./AddTrackPopup";
 import { audioController } from "../../backend/audio-player/AudioController";
 import { getTrack } from "../../backend/database/tracksCRUD";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { ShuffleToggle } from "../ShuffleToggle";
 
 interface TracksHeaderProps {
   collection: CollectionDTO;
@@ -66,6 +67,7 @@ export function TracksHeader({ collection }: TracksHeaderProps) {
           </IconButton>
         </div>
         <div className="tracks-header-play-collection">
+          <ShuffleToggle />
           <IconButton
             className="tracks-header-play-collection-button"
             onClick={() => playCollection()}>

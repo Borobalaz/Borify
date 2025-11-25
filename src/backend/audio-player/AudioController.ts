@@ -6,6 +6,7 @@ type Listener = () => void;
 class AudioController {
 
   private audio = new Audio();
+  private originalQueue: TrackDTO[] = [];
   private queue: TrackDTO[] = [];
   private currentIndex = -1;
   private currentTrack: TrackDTO;
@@ -122,6 +123,7 @@ class AudioController {
 
   enqueue(track: TrackDTO) {
     this.queue.push(track);
+    this.originalQueue.push(track);
     this.notify("queueUpdate");
 
     // If nothing playing yet, start
@@ -134,6 +136,7 @@ class AudioController {
 
   setQueue(tracks: TrackDTO[]) {
     this.queue = tracks;
+    this.originalQueue = [...tracks];
     this.currentIndex = tracks.length > 0 ? 0 : -1;
     this.loadCurrent();
     this.notify("queueUpdate");
@@ -153,6 +156,53 @@ class AudioController {
       this.loadCurrent();
       this.audio.play();
     }
+  }
+
+  shuffle() {
+    if (this.queue.length <= 1) return;
+
+    // Preserve the current track
+    const current = this.queue[this.currentIndex];
+
+    // Create a copy to shuffle
+    const arr = [...this.queue];
+
+    // Fisher–Yates shuffle
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
+    // Ensure current track stays at index 0
+    const newIndex = arr.indexOf(current);
+    if (newIndex !== -1) {
+      [arr[0], arr[newIndex]] = [arr[newIndex], arr[0]];
+    }
+
+    this.queue = arr;
+    this.currentIndex = 0;
+    this.play();
+    
+    this.loadCurrent();
+    this.notify("queueUpdate");
+  }
+
+  unshuffle() {
+    if (!this.originalQueue.length || this.queue.length <= 1) return;
+
+    const current = this.currentTrack;
+    this.queue = [...this.originalQueue];
+
+    // Find current track in restored queue
+    const idx = this.queue.indexOf(current);
+    if (idx !== -1) {
+      this.currentIndex = idx;
+      const time = this.audio.currentTime;
+      this.loadCurrent();
+      this.audio.currentTime = time;
+    }
+
+    this.notify("queueUpdate");
   }
 
   private loadCurrent() {

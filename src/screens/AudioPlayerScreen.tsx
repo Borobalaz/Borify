@@ -22,12 +22,13 @@ export function AudioPlayerScreen({ onReturn }: AudioPlayerScreenProps) {
     const handleTitle = () => setTitle(audioController.getCurrentTrack()?.title);
     const handleArtist = () => setArtist(audioController.getCurrentTrack()?.artist);
     const handleCurrentTrack = async () => {
-      setCurrentTrack(audioController.getCurrentTrack());
+      const track = audioController.getCurrentTrack();
+      setCurrentTrack(track);
       let collection: CollectionDTO | null = null; // default to null
 
-      if (currentTrack) {
+      if (track) {
         let allCollections = await getAllCollections();
-        collection = allCollections.find((col) => col.tracks.includes(currentTrack.track_id)) || null;
+        collection = allCollections.find((col) => col.tracks.includes(track.track_id) && col.title != "All Tracks") || null;
       }
       setCover(collection?.cover);
     }
