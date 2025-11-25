@@ -46,7 +46,7 @@ export function TrackLabel({ onOpenPlayer }: TrackLabelProps) {
       </IconButton>
       <img
         className="track-label-collection-cover"
-        src="./collection_placeholder.jpg"
+        src="./cover_placeholder.jpg"
         hidden={true} />
       <p>{title} - {artist}</p>
     </div>
