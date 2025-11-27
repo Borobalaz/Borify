@@ -67,7 +67,6 @@ export function TracksHeader({ collection }: TracksHeaderProps) {
           </IconButton>
         </div>
         <div className="tracks-header-play-collection">
-          <ShuffleToggle />
           <IconButton
             className="tracks-header-play-collection-button"
             onClick={() => playCollection()}>

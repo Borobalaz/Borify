@@ -8,6 +8,7 @@ class AudioController {
   private audio = new Audio();
   private originalQueue: TrackDTO[] = [];
   private queue: TrackDTO[] = [];
+  private queueRepeat: boolean = false;
   private currentIndex = -1;
   private currentTrack: TrackDTO;
 
@@ -46,7 +47,9 @@ class AudioController {
     if (track) {
       this.audio.src = URL.createObjectURL(track.audio);
       this.currentTrack = track;
+      this.queue = [track];
       this.currentIndex = -1;
+      this.notify("queueUpdate");
     }
     if (!this.audio.src) {
       console.warn("AudioController.play(): No audio source loaded.");
@@ -145,26 +148,28 @@ class AudioController {
   next() {
     if (this.currentIndex < this.queue.length - 1) {
       this.currentIndex++;
-      this.loadCurrent();
-      this.audio.play();
     }
+    else if (this.queueRepeat) {
+      this.currentIndex = 0;
+    }
+    this.loadCurrent();
+    this.audio.play();
   }
 
   previous() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
-      this.loadCurrent();
-      this.audio.play();
     }
+    else if (this.queueRepeat) {
+      this.currentIndex = this.queue.length - 1;
+    }
+    this.loadCurrent();
+    this.audio.play();
   }
 
   shuffle() {
     if (this.queue.length <= 1) return;
 
-    // Preserve the current track
-    const current = this.queue[this.currentIndex];
-
-    // Create a copy to shuffle
     const arr = [...this.queue];
 
     // Fisher–Yates shuffle
@@ -173,47 +178,44 @@ class AudioController {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 
-    // Ensure current track stays at index 0
-    const newIndex = arr.indexOf(current);
-    if (newIndex !== -1) {
-      [arr[0], arr[newIndex]] = [arr[newIndex], arr[0]];
-    }
-
     this.queue = arr;
-    this.currentIndex = 0;
-    this.play();
-    
-    this.loadCurrent();
     this.notify("queueUpdate");
   }
 
   unshuffle() {
     if (!this.originalQueue.length || this.queue.length <= 1) return;
 
-    const current = this.currentTrack;
     this.queue = [...this.originalQueue];
-
-    // Find current track in restored queue
-    const idx = this.queue.indexOf(current);
-    if (idx !== -1) {
-      this.currentIndex = idx;
-      const time = this.audio.currentTime;
-      this.loadCurrent();
-      this.audio.currentTime = time;
-    }
-
     this.notify("queueUpdate");
   }
 
+  setRepeat(val: boolean) {
+    this.queueRepeat = val;
+  }
+
+  getQueue() {
+    return this.queue;
+  }
+
   private loadCurrent() {
-    if (this.currentIndex === -1 || !this.queue[this.currentIndex]) return;
     const track = this.queue[this.currentIndex];
+    if (!track) return;
+
+    // Prevent reload if same track
+    if (this.currentTrack && this.currentTrack.track_id === track.track_id) {
+      return;
+    }
+
     this.audio.src = URL.createObjectURL(track.audio);
     this.currentTrack = track;
   }
 
   getCurrentTrack(): TrackDTO {
     return this.currentTrack;
+  }
+
+  getCurrentIndex(): number {
+    return this.currentIndex;
   }
 }
 

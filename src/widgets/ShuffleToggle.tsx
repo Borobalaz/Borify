@@ -1,26 +1,25 @@
 import { useState } from "preact/hooks";
 import "./ShuffleToggle.css"
 import ShuffleIcon from '@mui/icons-material/Shuffle';
-import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
 import { audioController } from "../backend/audio-player/AudioController";
-import { IconButton } from "@mui/material";
+import clsx from "clsx";
 
 export function ShuffleToggle() {
-  let [isShuffle, setIsShuffle] = useState<boolean>();
+  let [isShuffle, setIsShuffle] = useState<boolean>(false);
 
   return (
-    <div className="shuffle-toggle"
+    <div className={clsx("shuffle-toggle", {"shuffled": isShuffle})}
       onClick={() => {
         setIsShuffle(!isShuffle);
       }}>
       {isShuffle ?
-        <IconButton onClick={() => { audioController.unshuffle() }}>
-          <ShuffleOnIcon />
-        </IconButton>
-        :
-        <IconButton onClick={() => { audioController.shuffle() }}>
+        <div onClick={() => { audioController.unshuffle() }}>
           <ShuffleIcon />
-        </IconButton>
+        </div>
+        :
+        <div onClick={() => { audioController.shuffle() }}>
+          <ShuffleIcon />
+        </div>
       }
     </div>
   );

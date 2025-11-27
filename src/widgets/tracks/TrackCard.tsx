@@ -26,9 +26,6 @@ export function TrackCard({ onPlay, trackID, place }: TrackCardProps) {
       setTrackObj(await getTrack(trackID));
       setLoading(false);
     };
-    if(trackID == "t10") {
-      trackID = "t10";
-    }
     getTrackFromDatabase();
   }, [])
 

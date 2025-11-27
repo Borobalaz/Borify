@@ -1,4 +1,4 @@
-.shuffle-toggle {
+.repeat-toggle {
   box-shadow: none;
   display: flex;
   color: var(--text-color);
@@ -7,8 +7,9 @@
   justify-content: center;
   border: 1px solid;
 
-  &.shuffled {
+  &.repeat {
     color: var(--bg-color);
     background-color: var(--text-color);
   }
+
 }

@@ -4,6 +4,7 @@
   overflow-y: auto;
   overflow: auto;
   width: 100%;
+  min-width: 500px;
   background-color: var(--bg-color);
   margin-left: 5px;
   margin-top: 5px;

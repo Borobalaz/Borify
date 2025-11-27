@@ -1,0 +1,10 @@
+.track-queue-footer {
+  height: 50px;
+  align-items: center;
+  background-color: var(--shade-color);
+  &>.track-footer-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    height: 80%;
+  }
+}

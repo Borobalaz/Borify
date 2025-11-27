@@ -1,0 +1,17 @@
+.track-queue-header {
+  background: linear-gradient(to left, var(--primary-color), var(--bg-color));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+
+  & .track-queue-header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    flex: 1 1 auto;
+    text-align: right;
+    margin-right: 5px;
+  }
+}
