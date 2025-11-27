@@ -137,20 +137,28 @@ class AudioController {
     }
   }
 
-  setQueue(tracks: TrackDTO[]) {
+  setQueue(tracks: TrackDTO[], startIndex?: number) {
     this.queue = tracks;
     this.originalQueue = [...tracks];
-    this.currentIndex = tracks.length > 0 ? 0 : -1;
+    if (startIndex) {
+      this.currentIndex = startIndex;
+    }
+    else {
+      this.currentIndex = tracks.length > 0 ? 0 : -1;
+    }
     this.loadCurrent();
     this.notify("queueUpdate");
   }
 
   next() {
-    if (this.currentIndex < this.queue.length - 1) {
+    if (this.queueRepeat) {
+      this.currentIndex = (this.currentIndex + 1) % this.queue.length;
+    }
+    else if (this.currentIndex < this.queue.length - 1) {
       this.currentIndex++;
     }
-    else if (this.queueRepeat) {
-      this.currentIndex = 0;
+    else {
+      return;
     }
     this.loadCurrent();
     this.audio.play();

@@ -43,7 +43,7 @@ export function TrackCard({ onPlay, trackID, place }: TrackCardProps) {
       tabIndex={0}
     >
       {isHovered ?
-        <PlayArrowIcon className="track-card-play-icon" 
+        <PlayArrowIcon className="track-card-play-icon"
           onClick={() => {
             (onPlay && onPlay());
             audioController.play(trackObj);

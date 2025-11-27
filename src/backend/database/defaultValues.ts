@@ -145,7 +145,7 @@ export async function loadDefaultData(): Promise<void> {
       collection_id: c.collection_id,
       title: c.title,
       description: c.description,
-      cover: coverBlob,    
+      cover: coverBlob,
       tracks: c.tracks,
     });
   }
@@ -161,8 +161,12 @@ export async function loadDefaultData(): Promise<void> {
 }
 
 async function getDurationWithWebAudio(blob: Blob): Promise<number> {
-  const arrayBuffer = await blob.arrayBuffer();
-  const audioCtx = new AudioContext();
-  const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-  return decoded.duration;
+  return new Promise((resolve) => {
+    const audio = document.createElement("audio");
+    audio.src = URL.createObjectURL(blob);
+    audio.addEventListener("loadedmetadata", () => {
+      resolve(audio.duration);
+      URL.revokeObjectURL(audio.src);
+    });
+  });
 }

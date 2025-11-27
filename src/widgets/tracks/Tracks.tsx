@@ -2,9 +2,11 @@ import { useEffect, useState } from "preact/hooks";
 import { TrackCard } from "./TrackCard";
 import "./Tracks.css";
 import { TracksHeader } from "./TracksHeader";
-import { CollectionDTO } from "../../backend/database/DTOs";
+import { CollectionDTO, TrackDTO } from "../../backend/database/DTOs";
 import { onTracksUpdated, offTracksUpdated, onCollectionsUpdated, offCollectionsUpdated } from "../../backend/database/databaseEvents";
 import { getCollection } from "../../backend/database/collectionsCRUD";
+import { audioController } from "../../backend/audio-player/AudioController";
+import { getTrack, getTracks } from "../../backend/database/tracksCRUD";
 
 interface TracksProps {
   onPlayTrack?: () => void;
@@ -44,6 +46,11 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
     };
   }, [collection_id]);
 
+  async function playCollFromTrack(index: number) {
+    const tracks = await getTracks(collection_id);
+    audioController.setQueue(tracks, index);
+  }
+
   if (loading) {
     return <p className="tracks-widget-loading-text"> Loading... </p>
   }
@@ -57,7 +64,7 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
           collection.tracks.map((track, index) => (
             <TrackCard
               key={track}
-              onPlay={onPlayTrack}
+              onPlay={() => playCollFromTrack(index)}
               trackID={track}
               place={index + 1} />
           ))

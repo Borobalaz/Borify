@@ -32,27 +32,20 @@ export function AudioPlayerScreen({ onReturn }: AudioPlayerScreenProps) {
       }
       setCover(collection?.cover);
     }
-    const handleEnded = () => {
-      setTitle("");
-      setArtist("");
-      setCurrentTrack(null);
-    }
 
     audioController.on("trackChange", handleTitle);
     audioController.on("trackChange", handleArtist);
     audioController.on("trackChange", handleCurrentTrack);
-    audioController.on("ended", handleEnded);
 
     // Set initial values on mount
     setTitle(audioController.getCurrentTrack()?.title);
     setArtist(audioController.getCurrentTrack()?.artist);
-    setCurrentTrack(audioController.getCurrentTrack());
+    handleCurrentTrack();
 
     return () => {
       audioController.off("trackChange", handleTitle);
       audioController.off("trackChange", handleArtist);
       audioController.off("trackChange", handleCurrentTrack);
-      audioController.off("ended", handleEnded);
     };
   }, []);
 

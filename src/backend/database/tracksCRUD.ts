@@ -1,3 +1,4 @@
+import { getCollection } from "./collectionsCRUD";
 import { emitTracksUpdated, emitCollectionsUpdated } from "./databaseEvents";
 import { TrackDTO } from "./DTOs";
 import { db } from "./initDatabase";
@@ -9,6 +10,21 @@ export async function addTrack(track: TrackDTO) {
 
 export async function getTrack(id: string) {
   return await db.get("Tracks", id);
+}
+
+export async function getTracks(col_id: string): Promise<TrackDTO[]> {
+  const collection = await getCollection(col_id);
+  if (!collection) return [];
+
+  const trackIds = collection.tracks;
+  const tracks: TrackDTO[] = [];
+
+  for (const id of trackIds) {
+    const track = await getTrack(id);
+    if (track) tracks.push(track);
+  }
+
+  return tracks;
 }
 
 export async function getAllTracks() {

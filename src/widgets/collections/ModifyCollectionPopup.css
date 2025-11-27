@@ -1,0 +1,101 @@
+.modify-collection-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  background: var(--shade-color);
+  padding: 26px;
+  border-radius: 14px;
+
+  width: 360px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.18);
+
+  color: var(--text-color);
+  font-family: system-ui, sans-serif;
+}
+
+/* Title */
+.modify-collection-popup h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.modify-collection-popup .cover-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--shade-color);
+}
+
+.modify-collection-popup input[type="text"],
+.modify-collection-popup textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--bg-color, #444);
+  background: var(--bg-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-color);
+
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.modify-collection-popup input[type="text"]:focus,
+.modify-collection-popup textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--shade-color);
+}
+
+.modify-collection-popup textarea {
+  resize: none;
+  height: 80px;
+}
+
+.collection-cover-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.collection-cover-label p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.collection-cover-input {
+  padding: 8px;
+  background: var(--bg-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #444);
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.modify-collection-popup .create-collection-button {
+  align-self: center;
+
+  width: 48px;
+  height: 48px;
+
+  background: var(--primary-color);
+  color: white;
+
+  border-radius: 10px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.modify-collection-popup .create-collection-button:hover {
+  background: var(--primary-color-hover, #777);
+  transform: translateY(-2px);
+}
+
+.modify-collection-popup .create-collection-button:active {
+  transform: translateY(0);
+}

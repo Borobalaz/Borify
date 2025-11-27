@@ -1,29 +1,40 @@
 html {
-	font-family: 'Segoe UI', sans-serif; /*Font*/
-	font-size: 16px; /*Font mérete (16px=12pt)*/
-	line-height: 1.5; /*Sormagasság, 16px*1.5=24px, tipikus mostanában*/
-	background: var(--bg-color); /*Sötét téma sötét háttérrel*/
-	color: var(--text-color); /*Sötét téma fehér betűkkel*/
-	/* Default to dark theme */
-	--bg-color: #121212;
-	--text-color: #ffffff;
-	--shade-color: #1e1e1e;
-	--primary-color: #1099de;
-	--secondary-color: #535353;
+  font-family: 'Segoe UI', sans-serif;
+  /*Font*/
+  font-size: 16px;
+  /*Font mérete (16px=12pt)*/
+  line-height: 1.5;
+  /*Sormagasság, 16px*1.5=24px, tipikus mostanában*/
+  background: var(--bg-color);
+  /*Sötét téma sötét háttérrel*/
+  color: var(--text-color);
+  /*Sötét téma fehér betűkkel*/
+  /* Default to dark theme */
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --shade-color: #1e1e1e;
+  --primary-color: #1099de;
+  --secondary-color: #535353;
 }
 
 html,
 body,
 div {
-	margin: 0; /* CSS reset */
-	padding: 0; /* CSS reset */
-	display: grid; /* grid-re állunk át mindenhol */
-	grid: minmax(0, 1fr) / minmax(0, 1fr); /* Az egyetlen gyerek szülő méretű */
+  margin: 0;
+  /* CSS reset */
+  padding: 0;
+  /* CSS reset */
+  display: grid;
+  /* grid-re állunk át mindenhol */
+  grid: minmax(0, 1fr) / minmax(0, 1fr);
+  /* Az egyetlen gyerek szülő méretű */
 }
 
 body {
-	min-height: 100vh; /* ablak méretű */
-	max-height: 100vh; /* ablak méretű */
+  min-height: 100vh;
+  /* ablak méretű */
+  max-height: 100vh;
+  /* ablak méretű */
   min-width: 500px;
   overflow-y: hidden;
 }
@@ -31,48 +42,60 @@ body {
 input,
 button,
 a {
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-	border: 0; /* ne legyen kerete a buttonnak és az inputnak */
-	color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: 0;
+  /* ne legyen kerete a buttonnak és az inputnak */
+  color: inherit;
 }
 
 input {
-	background: black; /* Sötét téma */
+  background: black;
+  /* Sötét téma */
 }
 
 button {
-	padding: 8px 16px; /* Tágas */
-	background: #2ae; /* Sötét téma */
-	font-weight: 600; /* Bold */
-	border-radius: 7px; /* Lekerekített */
-	box-shadow: 1px 2px 10px black; /* Árnyék */
-	transition: all 145ms ease-out; /* Átmenet az árnyékra és színre, ami változik */
+  padding: 8px 16px;
+  /* Tágas */
+  background: #2ae;
+  /* Sötét téma */
+  font-weight: 600;
+  /* Bold */
+  border-radius: 7px;
+  /* Lekerekített */
+  box-shadow: 1px 2px 10px black;
+  /* Árnyék */
+  transition: all 145ms ease-out;
+  /* Átmenet az árnyékra és színre, ami változik */
 
-	&:hover {
-		background: #3cf; /* Megváltoztatja a színét, ha fölé visszük az egeret */
-		box-shadow: 2px 5px 20px black; /* Nagyobb árnyék, ha kiemelkedik */
-	}
+  &:hover {
+    background: #3cf;
+    /* Megváltoztatja a színét, ha fölé visszük az egeret */
+    box-shadow: 2px 5px 20px black;
+    /* Nagyobb árnyék, ha kiemelkedik */
+  }
 
-	&:active {
-		box-shadow: none; /* Lenyomva nincs árnyék */
-		background: #17b; /* Megváltoztatja a színét, ha aktiváljuk (lenyomjuk) */
-	}
+  &:active {
+    box-shadow: none;
+    /* Lenyomva nincs árnyék */
+    background: #17b;
+    /* Megváltoztatja a színét, ha aktiváljuk (lenyomjuk) */
+  }
 }
 
 .theme-dark {
-	--bg-color: #202020;
-	--text-color: #dadada;
-	--shade-color: #1e1e1e;
-	--primary-color: #1099de;
-	--secondary-color: #535353;
+  --bg-color: #202020;
+  --text-color: #dadada;
+  --shade-color: #1e1e1e;
+  --primary-color: #1099de;
+  --secondary-color: #535353;
 }
 
 .theme-light {
-	--bg-color: #ffffff;
-	--shade-color: #f0f0f0;
-	--text-color: #292929;
-	--primary-color: #1099de;
-	--secondary-color: #ababab;
+  --bg-color: #ffffff;
+  --shade-color: #e8e8e8;
+  --text-color: #292929;
+  --primary-color: #1099de;
+  --secondary-color: #ababab;
 }

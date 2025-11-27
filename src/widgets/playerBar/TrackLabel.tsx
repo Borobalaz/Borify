@@ -17,15 +17,10 @@ export function TrackLabel({ onOpenPlayer }: TrackLabelProps) {
   useEffect(() => {
     const handleTitle = () => setTitle(audioController.getCurrentTrack()?.title);
     const handleArtist = () => setArtist(audioController.getCurrentTrack()?.artist);
-    const handleEnded = () => {
-      setTitle("");
-      setArtist("");
-    }
     //const handleCover = () => setCover(audioController.getCurrentTrack()?.);
 
     audioController.on("trackChange", handleTitle);
     audioController.on("trackChange", handleArtist);
-    audioController.on("ended", handleEnded);
 
     // Set initial values on mount
     setTitle(audioController.getCurrentTrack()?.title);
@@ -34,7 +29,6 @@ export function TrackLabel({ onOpenPlayer }: TrackLabelProps) {
     return () => {
       audioController.off("trackChange", handleTitle);
       audioController.off("trackChange", handleArtist);
-      audioController.off("ended", handleEnded);
     };
   }, []);
 
@@ -46,7 +40,7 @@ export function TrackLabel({ onOpenPlayer }: TrackLabelProps) {
       </IconButton>
       <img
         className="track-label-collection-cover"
-        src="./cover_placeholder.jpg"
+        src="./cover_placeholder.png"
         hidden={true} />
       <p>{title} - {artist}</p>
     </div>
