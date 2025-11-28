@@ -13,7 +13,7 @@ interface CollectionsProps {
   onSelectedCollectionChange: (selectedCollection) => void;
 }
 
-export function Collections({ onCollapse, onSelectedCollectionChange}: CollectionsProps) {
+export function Collections({ onCollapse, onSelectedCollectionChange }: CollectionsProps) {
 
   const [collections, setCollections] = useState<CollectionDTO[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,12 +22,20 @@ export function Collections({ onCollapse, onSelectedCollectionChange}: Collectio
     const loadCollections = async () => {
       await initDB();
       const allCollections = await getAllCollections();
+
+      // Move "All Tracks" to the first position
+      allCollections.sort((a, b) => {
+        if (a.title === "All Tracks") return -1;
+        if (b.title === "All Tracks") return 1;
+        return 0;
+      });
+
       setCollections(allCollections);
       setLoading(false)
     };
     onCollectionsUpdated(loadCollections);
     loadCollections();
-  
+
     return () => {
       offCollectionsUpdated(loadCollections);
     };
@@ -41,9 +49,9 @@ export function Collections({ onCollapse, onSelectedCollectionChange}: Collectio
         <p className="collections-list-loading-text">Loading...</p> :
         <div className="collections-list">
           {collections.map((c) => (
-            <CollectionCard 
-              collection={c} 
-              onClick={onSelectedCollectionChange}/>
+            <CollectionCard
+              collection={c}
+              onClick={onSelectedCollectionChange} />
           ))}
         </div>
       )}
