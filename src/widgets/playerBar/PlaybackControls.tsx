@@ -21,7 +21,7 @@ export function PlaybackControls() {
     audioController.on("pause", () => setIsPlaying(false));
     audioController.on("trackChange", () => handleDuration());
     audioController.on("timeUpdate", () => handleCurrentTime());
-    
+
     handleDuration();
     handleCurrentTime();
 

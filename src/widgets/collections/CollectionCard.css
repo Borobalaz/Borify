@@ -33,7 +33,6 @@
     margin-left: auto;
     color: var(--text-color);
     box-shadow: none;
-    z-index: 2;
   }
 
   /* --- OPTIONS DROPDOWN STYLES --- */
@@ -41,7 +40,7 @@
     position: absolute;
     top: -70px;
     right: -0px;
-    z-index: 99999;
+    z-index: 2;
 
     padding: 4px 4px;
     background: var(--secondary-color);

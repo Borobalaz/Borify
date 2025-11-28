@@ -90,7 +90,7 @@ class AudioController {
   }
 
   getDuration() {
-    return this.audio.duration;
+    return this.audio.duration ? this.audio.duration : 0;
   }
 
   onEnded(callback: () => void) {
