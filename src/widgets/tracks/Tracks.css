@@ -7,9 +7,9 @@
   min-width: 500px;
   background-color: var(--bg-color);
   margin-left: 5px;
+  margin-right: 5px;
   margin-top: 5px;
   border-radius: 5px;
-  min-width: 0;
 
   & .tracks-list {
     display: flex;

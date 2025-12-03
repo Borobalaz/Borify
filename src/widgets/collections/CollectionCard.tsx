@@ -3,7 +3,7 @@ import "./CollectionCard.css";
 import { CollectionDTO } from "../../backend/database/DTOs";
 import { deleteCollection } from "../../backend/database/collectionsCRUD";
 import { useEffect, useRef, useState } from "preact/hooks";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { usePopup } from "../../utility/PopupContext";
@@ -58,7 +58,7 @@ export function CollectionCard({ collection, onClick }: CollectionCardProps) {
             e.stopPropagation();
             setOptionsOpen(!optionsOpen);
           }}>
-          <MoreHorizIcon />
+          <MoreVertIcon />
         </IconButton>
       )}
       {

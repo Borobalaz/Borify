@@ -70,7 +70,7 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
               place={index + 1} />
           ))
           :
-          "ASD"
+          " "
         )}
       </div>
     </div>

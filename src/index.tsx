@@ -17,12 +17,13 @@ export function App() {
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    setIsDarkTheme(localStorage.getItem("theme") === "dark");
     const initializeApp = async () => {
       try {
         await initDB();
         console.log("IndexedDB initialized");
 
-        setIsDarkTheme(localStorage.getItem("theme") == "dark");
 
         onTracksUpdated(setupAutoUpdateAllTracksCollection);
 

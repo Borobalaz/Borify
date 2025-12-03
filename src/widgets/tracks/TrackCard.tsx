@@ -12,6 +12,9 @@ import { usePopup } from "../../utility/PopupContext";
 import { useRef } from "react";
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { removeTrackFromCollection } from "../../backend/database/collectionsCRUD";
 
 interface TrackCardProps {
   onPlay?: () => void;
@@ -27,31 +30,23 @@ export function TrackCard({ onPlay, onRemove, trackID, place }: TrackCardProps) 
   const [loading, setLoading] = useState(true);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const optionsRef = useRef<HTMLDivElement>(null);
   const { show } = usePopup();
 
+  function handleClickOutside(e: MouseEvent) {
+    if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+      setOptionsOpen(false);
+    }
+  }
+
+  const getTrackFromDatabase = async () => {
+    setTrackObj(await getTrack(trackID));
+    setLoading(false);
+  }
+
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      const card = cardRef.current;
-      const menu = optionsRef.current;
-
-      if (!card || !menu) return;
-
-      const clickedOutside =
-        !card.contains(e.target as Node) &&
-        !menu.contains(e.target as Node);
-
-      if (clickedOutside) setOptionsOpen(false);
-    }
-
-    const getTrackFromDatabase = async () => {
-      setTrackObj(await getTrack(trackID));
-      setLoading(false);
-    }
-    document.addEventListener("click", handleClickOutside);
     getTrackFromDatabase();
-
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [])
 
   if (loading) {
@@ -62,10 +57,10 @@ export function TrackCard({ onPlay, onRemove, trackID, place }: TrackCardProps) 
     <div
       className="track-card"
       ref={cardRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onFocus={() => setIsHovered(true)}
-      onBlur={() => setIsHovered(false)}
+      onMouseEnter={() => { if (!optionsOpen) setIsHovered(true); }}
+      onMouseLeave={() => { if (!optionsOpen) setIsHovered(false); }}
+      onFocus={() => { if (!optionsOpen) setIsHovered(true); }}
+      onBlur={() => { if (!optionsOpen) setIsHovered(false); }}
       tabIndex={0}
     >
       {isHovered ?
@@ -84,13 +79,16 @@ export function TrackCard({ onPlay, onRemove, trackID, place }: TrackCardProps) 
       <IconButton
         className="track-card-remove-button"
         color="inherit"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           setOptionsOpen(!optionsOpen);
         }}>
-        <RemoveCircleOutlineIcon />
+        <MoreHorizIcon />
       </IconButton>
-      {(optionsOpen == true) &&
-        <div className="track-card-options" ref={optionsRef}>
+      {
+        (optionsOpen == true) &&
+        <div className="track-card-options">
           <span onClick={(e) => {
             audioController.enqueue(trackObj);
             setOptionsOpen(false);
@@ -100,12 +98,26 @@ export function TrackCard({ onPlay, onRemove, trackID, place }: TrackCardProps) 
             Add to queue
           </span>
           <span onClick={(e) => {
-            show(<TrackManagerPopup />);
+            show(<TrackManagerPopup track={trackObj} />);
             setOptionsOpen(false);
             e.stopPropagation();
           }}>
             <PlaylistAddIcon />
             Add to playlist...
+          </span>
+          <span onClick={(e) => {
+            onRemove();
+            e.stopPropagation();
+          }}>
+            <RemoveCircleOutlineIcon />
+            Remove
+          </span>
+          <span onClick={(e) => {
+            deleteTrack(trackObj.track_id);
+            e.stopPropagation();
+          }}>
+            <DeleteSweepIcon />
+            Delete
           </span>
         </div>
       }

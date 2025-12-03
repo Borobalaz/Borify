@@ -1,5 +1,5 @@
 import { emitCollectionsUpdated } from "./databaseEvents";
-import { CollectionDTO } from "./DTOs";
+import { CollectionDTO, TrackDTO } from "./DTOs";
 import { db } from "./initDatabase";
 import { getAllTracks } from "./tracksCRUD";
 
@@ -36,6 +36,12 @@ export async function deleteCollection(id: string) {
 
 export function removeTrackFromCollection(collection: CollectionDTO, trackID: string) {
   collection.tracks = collection.tracks.filter(track => track !== trackID);
+  updateCollection(collection);
+  emitCollectionsUpdated();
+}
+
+export function addTrackToCollection(collection: CollectionDTO, track: string) {
+  collection.tracks.push(track);
   updateCollection(collection);
   emitCollectionsUpdated();
 }

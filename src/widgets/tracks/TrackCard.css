@@ -42,7 +42,7 @@
 .track-card .track-card-remove-button {
   background-color: transparent;
   border: none;
-  color: #ff0000;
+  color: var(--text-color);
   cursor: pointer;
   box-shadow: none;
 }
