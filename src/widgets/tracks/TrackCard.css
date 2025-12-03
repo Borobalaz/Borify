@@ -54,3 +54,71 @@
   color: #666;
   margin-left: 10px;
 }
+
+.track-card-remove-button-tooltip {
+  position: relative;
+  display: inline-block;
+  background-color: var(--primary-color);
+}
+
+.track-card-remove-button-tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s;
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 6px;
+  top: -10px;
+  left: 100%;
+  transform: translateX(10px);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.track-card-remove-button-tooltip:hover .track-card-remove-button-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.track-card .track-card-options {
+  position: absolute;
+  bottom: 50px;
+  right: 8px;
+  z-index: 10;
+
+
+  padding: 4px 4px;
+  background: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+
+.track-card .track-card-options>span {
+  border-radius: 5px;
+  padding: 4px;
+  font-size: large;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+
+.track-card .track-card-options>span:hover {
+  background-color: var(--shade-color);
+}
+
+
+/* Ensure parent is positioned */
+.track-card {
+  position: relative;
+}

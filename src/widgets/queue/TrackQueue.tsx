@@ -8,12 +8,12 @@ import { TrackQueueCard } from "./TrackQueueCard";
 
 export function TrackQueue() {
 
-  let [queue, setQueue] = useState<TrackDTO[]>();
-  let [currentTrack, setCurrentTrack] = useState<TrackDTO | null>();
+  let [queue, setQueue] = useState<TrackDTO[]>([]);
+  let [currentTrack, setCurrentTrack] = useState<TrackDTO | null>(null);
 
   useEffect(() => {
-    const handleQueue = () => { setQueue(audioController.getQueue()) };
-    const handleIndex = () => { setCurrentTrack(audioController.getCurrentTrack()) };
+    const handleQueue = () => setQueue(audioController.getQueue());
+    const handleIndex = () => setCurrentTrack(audioController.getCurrentTrack());
 
     audioController.on("queueUpdate", handleQueue);
     audioController.on("trackChange", handleIndex);
@@ -33,8 +33,8 @@ export function TrackQueue() {
             <TrackQueueCard
               key={track}
               trackID={track.track_id}
-              place={index + 1} 
-              playing={currentTrack?.track_id == track.track_id}/>
+              place={index + 1}
+              playing={currentTrack?.track_id == track.track_id} />
           ))
           :
           "Queue is empty"

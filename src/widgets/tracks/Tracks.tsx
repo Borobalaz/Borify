@@ -4,7 +4,7 @@ import "./Tracks.css";
 import { TracksHeader } from "./TracksHeader";
 import { CollectionDTO, TrackDTO } from "../../backend/database/DTOs";
 import { onTracksUpdated, offTracksUpdated, onCollectionsUpdated, offCollectionsUpdated } from "../../backend/database/databaseEvents";
-import { getCollection } from "../../backend/database/collectionsCRUD";
+import { getCollection, removeTrackFromCollection } from "../../backend/database/collectionsCRUD";
 import { audioController } from "../../backend/audio-player/AudioController";
 import { getTrack, getTracks } from "../../backend/database/tracksCRUD";
 
@@ -65,6 +65,7 @@ export function Tracks({ onPlayTrack, collection_id }: TracksProps) {
             <TrackCard
               key={track}
               onPlay={() => playCollFromTrack(index)}
+              onRemove={() => removeTrackFromCollection(collection, track)}
               trackID={track}
               place={index + 1} />
           ))

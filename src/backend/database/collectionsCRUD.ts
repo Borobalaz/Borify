@@ -36,5 +36,6 @@ export async function deleteCollection(id: string) {
 
 export function removeTrackFromCollection(collection: CollectionDTO, trackID: string) {
   collection.tracks = collection.tracks.filter(track => track !== trackID);
+  updateCollection(collection);
   emitCollectionsUpdated();
 }

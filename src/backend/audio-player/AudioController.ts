@@ -202,7 +202,7 @@ class AudioController {
   }
 
   getQueue() {
-    return this.queue;
+    return [...this.queue];
   }
 
   private loadCurrent() {
