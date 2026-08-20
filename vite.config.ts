@@ -10,5 +10,5 @@ export default defineConfig({
       'react-dom': 'preact/compat',
     },
   },
-  base: "",
+  base: "/Borify/",
 });
